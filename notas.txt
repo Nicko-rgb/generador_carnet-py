@@ -1,0 +1,10 @@
+#CREA EL ENTORNO VIRTUAL
+python -m venv nombre_del_entorno
+
+#ACTIVA EL ENORNO VIRTUAL
+nombre_del_entorno\Scripts\activate
+
+#INSTALA LAS LIBRERIAS 
+pip install requests
+#GENERA EL ARCHIVO DE LIBRERIAS
+pip freeze > requirements.txt
