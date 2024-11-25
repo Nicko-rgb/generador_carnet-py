@@ -53,7 +53,7 @@ def abrir_ruta_config():
     config_window.overrideredirect(True)
 
     tk.Label(config_window, text="Seleccione la carpeta para guardar los carnets:", 
-             font=("Arial", 12, 'italic'), bg="#e6f6f4").grid(row=0, column=0, columnspan=2, pady=10)
+             font=("Arial", 12), bg="#e6f6f4").grid(row=0, column=0, columnspan=2, pady=10)
 
     # Campo de entrada para la ruta
     frame_ruta = tk.Frame(config_window, bg="#e6f6f4")
@@ -72,11 +72,11 @@ def abrir_ruta_config():
     # Botones de Guardar y Cerrar
     btn_guardar = tk.Button(frame_buttons, text="Guardar ✓", command=guardar_ruta,
                             font=("Arial", 11, 'bold'), bg="#4CAF50", fg="white", width=10, borderwidth=2, relief="groove")
-    btn_guardar.grid(row=0, column=0, padx=(0, 15), pady=2)
+    btn_guardar.grid(row=0, column=1, pady=2)
 
     btn_cerrar = tk.Button(frame_buttons, text="Cerrar ✕", command=config_window.destroy,
                            font=("Arial", 11, 'bold'), bg="#f57576", fg="white", width=10, borderwidth=2, relief="groove")
-    btn_cerrar.grid(row=0, column=1, padx=0, pady=2)
+    btn_cerrar.grid(row=0, column=0, padx=(0, 15), pady=2)
 
 def iniciar_formulario():
     from src.Interfaz.inicio import iniciar_inicio
@@ -131,7 +131,7 @@ def iniciar_formulario():
     dni_entry = tk.Entry(frame_izquierda, font=("Arial", 12), width=33, borderwidth=2, relief="ridge")
     dni_entry.grid(row=5, column=0, ipady=3)
     
-    tk.Label(frame_izquierda, text='Universidad o Escuela 🖍', font=('Arial', 11, 'bold')).grid(row=6, column=0, sticky='w', pady=(10, 0))
+    tk.Label(frame_izquierda, text='Universidad o Escuela 🖍', bg='#d2d2d2', font=('Arial', 11, 'bold')).grid(row=6, column=0, sticky='w', pady=(10, 0))
     uni_entry = tk.Entry(frame_izquierda, font=('arial', 12), width=33, borderwidth=2, relief='ridge')
     uni_entry.grid(row=7, column=0, ipady=3)
 
@@ -159,7 +159,7 @@ def iniciar_formulario():
     label_logo = tk.Label(frame_logo, text='No se ha selecciona logo', bg="#d2d2d2", font=("Arial", 10))
     label_logo.grid(row=0, column=1)
     
-    logo_button = tk.Button(frame_logo, text='Seleciona logo', command=selecciona_logo, font=('arial', 11), bg="#8999ad", fg="black", borderwidth=2, relief="groove")
+    logo_button = tk.Button(frame_logo, text='Seleciona logo', command=selecciona_logo, font=('arial', 11), bg="#11aec9", fg="black", borderwidth=2, relief="groove")
     logo_button.grid(row=0, column=0)
     
     #crear un frama select image
@@ -194,24 +194,13 @@ def iniciar_formulario():
         image=icon,
         compound=tk.LEFT,
         command=lambda: generar_carnet(
-            # nombre_entry.get(),
-            # apellido_entry.get(),
-            # dni_entry.get(),
-            # uni_entry.get(),
-            # carrera_entry.get(),
-            # cod_entry.get(),
-            # vigencia_entry.get(),
-            # foto_path,
-            # foto_logo,
-            # ruta_guardar,
-            
-            'Ana Maria',
-            'Padilla Linares',
-            '12345678',
-            'INSITUTO DE EDUCACION SUPERIOR TECNOLOGICO PUBLICO "SUIZA"',
-            'Desarrollo de Sistemas de Informacion',
-            '3020',
-            '12-12-2024',
+            nombre_entry.get(),
+            apellido_entry.get(),
+            dni_entry.get(),
+            uni_entry.get(),
+            carrera_entry.get(),
+            cod_entry.get(),
+            vigencia_entry.get(),
             foto_path,
             foto_logo,
             ruta_guardar

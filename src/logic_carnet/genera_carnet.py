@@ -4,7 +4,16 @@ import tkinter as tk
 from src.logic_carnet.ajusta_foto_user import ajustar_foto_user
 
 def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, vigencia, foto_path, foto_logo, ruta_guardar):
-    # Dimensiones del carnet (5.4 x 8.6 cm a 300 dpi)
+    
+    def datos_validos(*args):
+        return all(args)  # Devuelve True si todos los argumentos son no vacíos y no nulos
+    
+    # verificar datos
+    if not datos_validos(nombre, apellido, dni, universidad, carrera, cod_estudiante, vigencia, foto_path, foto_logo):
+        tk.messagebox.showwarning("Información", "Todos los campos deben ser completados.")
+        return
+    
+    # dimensiones del carnet (5.4 x 8.6 cm a 300 dpi)
     # ancho, alto = 1012, 638 # Tamaño estándar de un DNI
     ancho, alto = 800, 500 
      # Cargar imagen de fondo
@@ -118,11 +127,11 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
     draw.text((230, 235), 'Carrera profesional', font=fuente_indicador, fill='black')
     ancho_carrera = 350
     linea_carrera = dividir_texto(carrera, fuente_negrita, ancho_carrera)
-    y_carre = 255  # Coordenada inicial en el eje Y
+    y_carre = 255  # coordenada inicial en el eje Y
     for linea in linea_carrera:
         x = centrar_text(linea, fuente_negrita)  # Centrar cada línea
         draw.text((230, y_carre), linea, font=fuente_negrita, fill="black")
-        y_carre += 30  # Espaciado entre líneas
+        y_carre += 30  # espaciado entre líneas
     
     draw.text((230, y_carre + 10), 'Código de Estudiante:', font=fuente_indicador, fill='black')
     draw.text((230, y_carre + 30), cod_estudiante, font=fuente_negrita, fill='black')
@@ -130,7 +139,7 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
     draw.text((dnix - 280, 380), f"DNI: {dni}", font=fuente_dni, fill="black")
     draw.text((20, 460), f"Vigencia: {vigencia}", font=fuente_vigen, fill="black")
 
-    # Generar código QR
+    # generar código QR
     qr_data = (f"Nombres: {nombre} {apellido}\n"
                f"DNI: {dni}\n"
                f"Carrera: {carrera}\n"
@@ -140,13 +149,13 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
     qr = qrcode.make(qr_data).resize((170, 170))  # Ajustar tamaño del QR
     carnet.paste(qr, (610, 310))
 
-    # Guardar el carnet
-    # if not ruta_guardar:
-    #     tk.messagebox.showwarning("Advertencia", "Debe configurar una ruta para guardar los carnets antes de generar.")
-    #     return
+    # guardar el carnet
+    if not ruta_guardar:
+        tk.messagebox.showwarning("Advertencia", "Debe configurar una ruta para guardar los carnets antes de generar.")
+        return
     
-    # output_path = f"{ruta_guardar}/carnet-{dni}.png"
-    output_path = f"carnet-{dni}.png"
+    output_path = f"{ruta_guardar}/carnet-{dni}.png"
+    # output_path = f"carnet-{dni}.png"
     carnet.save(output_path)
     carnet.show()
     print(f"Carnet generado y guardado en: {output_path}")
