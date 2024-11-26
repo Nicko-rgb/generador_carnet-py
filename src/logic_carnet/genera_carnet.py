@@ -2,6 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 import qrcode
 import tkinter as tk
 from src.logic_carnet.ajusta_foto_user import ajustar_foto_user
+import os
 
 def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, vigencia, foto_path, foto_logo, ruta_guardar):
     
@@ -18,7 +19,8 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
     ancho, alto = 800, 500 
      # Cargar imagen de fondo
     try:
-        fondo = Image.open('img/fondo.png').resize((ancho, alto))  # Redimensionar al tamaño del carnet
+        fondo_path = os.path.join(os.path.dirname(__file__), '../../img', 'fondo.png')
+        fondo = Image.open(fondo_path).resize((ancho, alto))  # Redimensionar al tamaño del carnet
         carnet = fondo.copy()  # Usar la imagen como base
     except FileNotFoundError:
         print("Advertencia: No se encontró el archivo del fondo. Usando fondo sólido.")

@@ -2,6 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from src.Interfaz.formulario import iniciar_formulario
 from src.complement.centrar import centrar_ventana
+import os
 
 def iniciar_inicio():
     
@@ -30,8 +31,10 @@ def iniciar_inicio():
     frame_pie.pack(side=tk.BOTTOM, fill=tk.X, padx=20, pady=20)
 
     # Cargar y mostrar el logo izquierdo
+    logo_suiza = os.path.join(os.path.dirname(__file__), '../../img', 'logo.png')
+    
     try:
-        logo_izquierdo = Image.open("img/logo.png")  # Cambia esta ruta por la ubicación de tu logo izquierdo
+        logo_izquierdo = Image.open(logo_suiza)  # Cambia esta ruta por la ubicación de tu logo izquierdo
         logo_izquierdo = logo_izquierdo.resize((60, 60), Image.LANCZOS)  # Redimensionar el logo
         logo_img_izquierdo = ImageTk.PhotoImage(logo_izquierdo)
 
@@ -41,8 +44,9 @@ def iniciar_inicio():
         print(f"No se pudo cargar el logo izquierdo: {e}")
 
     # Cargar y mostrar el logo derecho
+    logo_dsi = os.path.join(os.path.dirname(__file__), '../../img', 'dsiLogo.png')
     try:
-        logo_derecho = Image.open("img/dsiLogo.png")  # Cambia esta ruta por la ubicación de tu logo derecho
+        logo_derecho = Image.open(logo_dsi)  # Cambia esta ruta por la ubicación de tu logo derecho
         logo_derecho = logo_derecho.resize((60, 60), Image.LANCZOS)  # Redimensionar el logo
         logo_img_derecho = ImageTk.PhotoImage(logo_derecho)
 
@@ -64,12 +68,6 @@ def iniciar_inicio():
                                   font=("Helvetica", 12), bg="#e5e5e5", fg="#555")
     label_descripcion.pack(pady=5)
     
-    # Cargar la imagen del icono
-    icon_path = "img/inicia.png"
-    icon_image = Image.open(icon_path)
-    icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
-    icon = ImageTk.PhotoImage(icon_image)
-    
     def on_enter(event):
         event.widget['bg'] = '#00808d'  # Cambia a color verde claro al pasar el cursor
         
@@ -77,7 +75,7 @@ def iniciar_inicio():
         event.widget['bg'] = '#00a0b0'
 
     # Botón para iniciar el programa
-    boton_iniciar = tk.Button(ventana, text="Iniciar Programa", image=icon, compound=tk.LEFT, command=lambda: [ventana.destroy(), iniciar_formulario()],
+    boton_iniciar = tk.Button(ventana, text="▶︎ Iniciar Programa", compound=tk.LEFT, command=lambda: [ventana.destroy(), iniciar_formulario()],
                                font=("Helvetica", 12, 'bold'), bg="#00a0b0", fg="white", activebackground='#00808d', padx=10, pady=10, borderwidth=2, relief='groove')
     boton_iniciar.pack(pady=40)
     boton_iniciar.bind('<Enter>', on_enter)
