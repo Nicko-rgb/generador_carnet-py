@@ -105,7 +105,7 @@ def iniciar_formulario():
     label_form.grid(column=0, row=0, columnspan=2)
     
     # Cargar la imagen del icono
-    icon_path = "img/ico-config.png"
+    icon_path = "IMG/ico-config.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     ico_config = ImageTk.PhotoImage(icon_image)
@@ -171,7 +171,7 @@ def iniciar_formulario():
     foto_label.grid(row=0, column=1, pady=20)
     
     # Cargar la imagen del icono
-    icon_path = "img/img-ico.png"
+    icon_path = "IMG/img-ico.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     ico_img = ImageTk.PhotoImage(icon_image)
@@ -182,18 +182,31 @@ def iniciar_formulario():
     foto_btn.grid(row=0, column=0, padx=0)
     
      # Cargar la imagen del icono
-    icon_path = "img/carnet-ico.png"
+    icon_path = "IMG/carnet-ico.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     icon = ImageTk.PhotoImage(icon_image)
+    
+    def limpiar_formulario():
+        nombre_entry.delete(0, tk.END)
+        apellido_entry.delete(0, tk.END)
+        dni_entry.delete(0, tk.END)
+        uni_entry.delete(0, tk.END)
+        carrera_entry.delete(0, tk.END)
+        cod_entry.delete(0, tk.END)
+        vigencia_entry.delete(0, tk.END)
 
-    # Botón para generar el carnet
-    generar_btn = tk.Button(
-        frame_formulario,
-        text="Generar Carnet",
-        image=icon,
-        compound=tk.LEFT,
-        command=lambda: generar_carnet(
+        # Restablecer las variables de foto y logo
+        global foto_path, foto_logo
+        foto_path = None
+        foto_logo = None
+
+        # Actualizar las etiquetas
+        foto_label.config(text="No se ha seleccionado foto")
+        label_logo.config(text='No se ha seleccionado logo')
+        
+    def generar_carnet_y_limpiar():
+        exito = generar_carnet(
             nombre_entry.get(),
             apellido_entry.get(),
             dni_entry.get(),
@@ -204,7 +217,18 @@ def iniciar_formulario():
             foto_path,
             foto_logo,
             ruta_guardar
-        ),
+        )
+
+        if exito:
+            limpiar_formulario() 
+
+    # Botón para generar el carnet
+    generar_btn = tk.Button(
+        frame_formulario,
+        text="Generar Carnet",
+        image=icon,
+        compound=tk.LEFT,
+        command=generar_carnet_y_limpiar,
         font=("Helvetica", 12, 'bold'),
         bg="#5ea5ff",
         fg="black",
@@ -233,6 +257,5 @@ def iniciar_formulario():
     label_derechos = tk.Label(frame_pie, text="© Derechos Reservados IESTP Suiza - 2024", 
                                 font=('calibri', 9), bg="#e5e5e5", fg="#333")
     label_derechos.pack(side=tk.LEFT, padx=(0, 0)) 
-
-
+    
     root.mainloop()

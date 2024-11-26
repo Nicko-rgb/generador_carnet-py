@@ -31,7 +31,7 @@ def iniciar_inicio():
 
     # Cargar y mostrar el logo izquierdo
     try:
-        logo_izquierdo = Image.open("img/logo.png")  # Cambia esta ruta por la ubicación de tu logo izquierdo
+        logo_izquierdo = Image.open("IMG/logo.png")  # Cambia esta ruta por la ubicación de tu logo izquierdo
         logo_izquierdo = logo_izquierdo.resize((60, 60), Image.LANCZOS)  # Redimensionar el logo
         logo_img_izquierdo = ImageTk.PhotoImage(logo_izquierdo)
 
@@ -42,7 +42,7 @@ def iniciar_inicio():
 
     # Cargar y mostrar el logo derecho
     try:
-        logo_derecho = Image.open("img/dsiLogo.png")  # Cambia esta ruta por la ubicación de tu logo derecho
+        logo_derecho = Image.open("IMG/dsiLogo.png")  # Cambia esta ruta por la ubicación de tu logo derecho
         logo_derecho = logo_derecho.resize((60, 60), Image.LANCZOS)  # Redimensionar el logo
         logo_img_derecho = ImageTk.PhotoImage(logo_derecho)
 
@@ -65,7 +65,7 @@ def iniciar_inicio():
     label_descripcion.pack(pady=5)
     
     # Cargar la imagen del icono
-    icon_path = "img/inicia.png"
+    icon_path = "IMG/inicia.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     icon = ImageTk.PhotoImage(icon_image)

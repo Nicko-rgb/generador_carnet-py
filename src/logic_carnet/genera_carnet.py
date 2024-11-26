@@ -18,7 +18,7 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
     ancho, alto = 800, 500 
      # Cargar imagen de fondo
     try:
-        fondo = Image.open('img/fondo.png').resize((ancho, alto))  # Redimensionar al tamaño del carnet
+        fondo = Image.open('IMG/fondo.png').resize((ancho, alto))  # Redimensionar al tamaño del carnet
         carnet = fondo.copy()  # Usar la imagen como base
     except FileNotFoundError:
         print("Advertencia: No se encontró el archivo del fondo. Usando fondo sólido.")
@@ -155,7 +155,13 @@ def generar_carnet(nombre, apellido, dni, universidad, carrera, cod_estudiante, 
         return
     
     output_path = f"{ruta_guardar}/carnet-{dni}.png"
-    # output_path = f"carnet-{dni}.png"
-    carnet.save(output_path)
-    carnet.show()
-    print(f"Carnet generado y guardado en: {output_path}")
+    try:
+        carnet.save(output_path)
+        carnet.show()
+        print(f"Carnet generado y guardado en: {output_path}")
+        return True 
+    except Exception as e:
+        print(f"Error al generar el carnet: {e}")
+        return False  # Indica fallo
+    
+    
