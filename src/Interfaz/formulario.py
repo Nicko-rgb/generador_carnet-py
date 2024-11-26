@@ -105,7 +105,7 @@ def iniciar_formulario():
     label_form.grid(column=0, row=0, columnspan=2)
     
     # Cargar la imagen del icono
-    icon_path = "IMG/ico-config.png"
+    icon_path = "img/ico-config.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     ico_config = ImageTk.PhotoImage(icon_image)
@@ -171,7 +171,7 @@ def iniciar_formulario():
     foto_label.grid(row=0, column=1, pady=20)
     
     # Cargar la imagen del icono
-    icon_path = "IMG/img-ico.png"
+    icon_path = "img/img-ico.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     ico_img = ImageTk.PhotoImage(icon_image)
@@ -182,7 +182,7 @@ def iniciar_formulario():
     foto_btn.grid(row=0, column=0, padx=0)
     
      # Cargar la imagen del icono
-    icon_path = "IMG/carnet-ico.png"
+    icon_path = "img/carnet-ico.png"
     icon_image = Image.open(icon_path)
     icon_image = icon_image.resize((20, 20), Image.LANCZOS) 
     icon = ImageTk.PhotoImage(icon_image)
